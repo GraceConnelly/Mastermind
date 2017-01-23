@@ -55,18 +55,23 @@ public class MastermindController {
 
     @CrossOrigin
     @RequestMapping (path = "/", method = RequestMethod.POST)
-    //public BoardViewModel homePage(@RequestBody int[] guess) {
+    public BoardViewModel homePage(@RequestBody int[] guess) {
+        Play thisPlay = new Play();
+        thisPlay.setPlaySlot1(guess[0]);
+        thisPlay.setPlaySlot2(guess[1]);
+        thisPlay.setPlaySlot3(guess[2]);
+        thisPlay.setPlaySlot4(guess[3]);
+        plays.save(thisPlay);
 
 
 //    public BoardViewModel homePage(@RequestBody Play newPlay) {
-//        plays.save(new Play(guess[0],guess[1],guess[2],));
-//        return new BoardViewModel((List)plays.findAll());
+
+        return new BoardViewModel((List)plays.findAll());
 
 
 ////        plays.update(numberGuess, currentRound);
 ////        Indicator.resolveUpdateIndicators();
     //  SIMPLIFIED POST!!
-    public Play homePage() {
-        return new Play();
+    //public Play homePage() {
     }
 }
