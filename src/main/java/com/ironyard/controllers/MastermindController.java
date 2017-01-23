@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.PostConstruct;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpServlet;
+import java.util.List;
 
 /**
  * Created by graceconnelly on 1/22/17.
@@ -63,13 +64,15 @@ public class MastermindController {
 
     @CrossOrigin
     @RequestMapping (path = "/", method = RequestMethod.POST)
-    public Indicator mastermind(){
-//        servlet.service("numberGuess",
-//                model.addAttribute("play",plays.findAll()),
-//                model.addAttribute("indicators",indicators.findAll());
+    public List<Play> homePage() {
+        return (List)plays.findAll();
 
-//        plays.update(numberGuess, currentRound);
-//        Indicator.resolveUpdateIndicators();
-        return new Indicator();
+////        servlet.service("numberGuess",
+////                model.addAttribute("play",plays.findAll()),
+////                model.addAttribute("indicators",indicators.findAll());
+//
+////        plays.update(numberGuess, currentRound);
+////        Indicator.resolveUpdateIndicators();
+//        return new Indicator();
     }
 }
