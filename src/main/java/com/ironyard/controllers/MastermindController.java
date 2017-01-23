@@ -5,6 +5,7 @@ import com.ironyard.entities.Play;
 import com.ironyard.services.IndicatorsRepository;
 import com.ironyard.services.PlayRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -49,7 +50,7 @@ public class MastermindController {
     }
 
     @RequestMapping (path = "/", method = RequestMethod.POST)
-    public List<Play> getUsers() {
+    public List<Play> getPlay() {
         return (List<Play>) plays.findAll();
     }
 }
