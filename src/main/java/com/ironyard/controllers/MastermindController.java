@@ -46,7 +46,7 @@ public class MastermindController {
                 blankIndicators.setIndicator4(0);
                 indicators.save(blankIndicators);
             }
-            Integer[] gameSolution = Play.gameSolution();
+            //Integer[] gameSolution = Play.gameSolution();
 //            blankRows.
 //            Play initalplay = new Play();
 //            initalplay.setPlaySlot1();
@@ -55,8 +55,10 @@ public class MastermindController {
 
     @CrossOrigin
     @RequestMapping (path = "/", method = RequestMethod.POST)
-    public int[] homePage(int[] guess) {
-//            Play thisPlay = new Play();
+    public Iterable<Indicator> home () {
+        init();
+    //public int[] homePage(int[] guess) {
+//        Play thisPlay = new Play();
 //        thisPlay.setPlaySlot1(guess[0]);
 //        thisPlay.setPlaySlot2(guess[1]);
 //        thisPlay.setPlaySlot3(guess[2]);
@@ -64,7 +66,7 @@ public class MastermindController {
 //        plays.save(thisPlay);
 //        System.out.println(plays);
 
-        return guess;
+        return indicators.findAll();
     }
 //
 //    @CrossOrigin

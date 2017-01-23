@@ -89,9 +89,9 @@ public class Indicator {
                 collSolution.set(collGuessed.indexOf(i), 0);
                 continue;
             }
-            if (collSolution.contains(i)) {
+            if (collSolution.contains(collGuessed.get(i))) {
                 indicator.add(1);
-                collSolution.set(collSolution.indexOf(i), 0);
+                collSolution.set(collSolution.indexOf(collGuessed.get(i)), 0);
                 continue;
             }
         }
