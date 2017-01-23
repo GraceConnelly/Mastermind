@@ -9,4 +9,5 @@ public class MastermindApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MastermindApplication.class, args);
 	}
+
 }
