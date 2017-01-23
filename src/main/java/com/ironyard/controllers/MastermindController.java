@@ -55,7 +55,7 @@ public class MastermindController {
 
     @CrossOrigin
     @RequestMapping (path = "/", method = RequestMethod.POST)
-    public int[] homePage(@RequestBody int[] guess) {
+    public Integer[] homePage(@RequestBody Integer[] guess) {
         Play thisPlay = new Play();
         thisPlay.setPlaySlot1(guess[0]);
         thisPlay.setPlaySlot2(guess[1]);
