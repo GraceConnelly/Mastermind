@@ -1,18 +1,16 @@
 package com.ironyard.controllers;
 
-import com.ironyard.entities.Indicators;
+import com.ironyard.entities.Indicator;
 import com.ironyard.entities.Play;
 import com.ironyard.services.IndicatorsRepository;
 import com.ironyard.services.PlayRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
-import java.util.Arrays;
-import java.util.List;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.servlet.http.HttpServlet;
 
 /**
  * Created by graceconnelly on 1/22/17.
@@ -21,28 +19,11 @@ import java.util.List;
 
 public class MastermindController {
 
-    public static boolean notUnique(Integer[] solution, int colorCode){
-        List<Integer> coll = Arrays.asList(solution);
-        return (colorCode == 0 || coll.contains(colorCode));
-    }
-
-    public static Integer[] gameSolution() {
-        Integer[] solution = new Integer[4];
-        Arrays.fill(solution,new Integer(0));
-        for (int i = 0; i < solution.length; i++) {
-            int colorCode = (int) (Math.random() * 8) + 1;
-            while (notUnique(solution, colorCode)) {
-                colorCode = (int) (Math.random() * 8) + 1;
-            }
-            solution[i] = colorCode;
-        }
-        return solution;
-    }
     @Autowired
     PlayRepository plays;
 
     @Autowired
-    IndicatorsRepository checks;
+    IndicatorsRepository indicators;
 
     @PostConstruct
     public void init() {
@@ -55,23 +36,40 @@ public class MastermindController {
                 blankPlays.setPlaySlot4(0);
                 plays.save(blankPlays);
             }
-            Indicators blankChecks = new Indicators();
+            Indicator blankIndicators = new Indicator();
             for (int i = 0; i < 11; i++) {
-                blankChecks.setIndicator1(0);
-                blankChecks.setIndicator2(0);
-                blankChecks.setIndicator3(0);
-                blankChecks.setIndicator4(0);
-                checks.save(blankChecks);
+                blankIndicators.setIndicator1(0);
+                blankIndicators.setIndicator2(0);
+                blankIndicators.setIndicator3(0);
+                blankIndicators.setIndicator4(0);
+                indicators.save(blankIndicators);
             }
+            Integer[] gameSolution = Play.gameSolution();
+            int currentRound = 0;
 //            blankRows.
 //            Play initalplay = new Play();
 //            initalplay.setPlaySlot1();
         }
     }
+
+//    @CrossOrigin
+//    @RequestMapping(path = "/", method = RequestMethod.GET)
+//    public String mastermind(Model model) {
+//        model.addAttribute("play",plays.findAll());
+//        model.addAttribute("indicators",indicators.findAll());
+//        //model.addAttribute("round",round);
+//        return "mastermind";
+//    }
+
     @CrossOrigin
     @RequestMapping (path = "/", method = RequestMethod.POST)
+    public Indicator mastermind(){
+//        servlet.service("numberGuess",
+//                model.addAttribute("play",plays.findAll()),
+//                model.addAttribute("indicators",indicators.findAll());
 
-    public List<Play> getPlay() {
-        return (List<Play>) plays.findAll();
+//        plays.update(numberGuess, currentRound);
+//        Indicator.resolveUpdateIndicators();
+        return new Indicator();
     }
 }

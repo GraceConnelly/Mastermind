@@ -8,8 +8,8 @@ import javax.persistence.*;
  * Created by graceconnelly on 1/22/17.
  */
 @Entity
-@Table(name = "board-check")
-public class Indicators {
+@Table(name = "indicators")
+public class Indicator {
     @Id
     @GeneratedValue
     int id;
@@ -70,4 +70,5 @@ public class Indicators {
             throw new CheckCodeOutOfBoundsException("The value of the set check is out of bounds.");
         }
     }
+
 }

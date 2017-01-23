@@ -3,12 +3,14 @@ package com.ironyard.entities;
 import com.ironyard.exceptions.PlayCodeOutOfBoundsException;
 
 import javax.persistence.*;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by graceconnelly on 1/22/17.
  */
 @Entity
-@Table(name = "board-play")
+@Table(name = "plays")
 public class Play {
     @Id
     @GeneratedValue
@@ -69,5 +71,24 @@ public class Play {
         if(playSlotValue < 0 || playSlotValue > 8){
             throw new PlayCodeOutOfBoundsException("The value of the set play is out of bounds.");
         }
+    }
+
+    //This code creates a random 4 int array
+    public static boolean notUnique(Integer[] solution, int colorCode){
+        List<Integer> coll = Arrays.asList(solution);
+        return (colorCode == 0 || coll.contains(colorCode));
+    }
+
+    public static Integer[] gameSolution() {
+        Integer[] solution = new Integer[4];
+        Arrays.fill(solution,new Integer(0));
+        for (int i = 0; i < solution.length; i++) {
+            int colorCode = (int) (Math.random() * 8) + 1;
+//            while (notUnique(solution, colorCode)) {
+//                colorCode = (int) (Math.random() * 8) + 1;
+//            }
+            solution[i] = colorCode;
+        }
+        return solution;
     }
 }
