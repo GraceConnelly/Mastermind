@@ -5,13 +5,13 @@ import com.ironyard.entities.Play;
 import com.ironyard.services.IndicatorsRepository;
 import com.ironyard.services.PlayRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.PostConstruct;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -20,6 +20,24 @@ import java.util.List;
 @RestController
 
 public class MastermindController {
+
+    public static boolean notUnique(Integer[] solution, int colorCode){
+        List<Integer> coll = Arrays.asList(solution);
+        return (colorCode == 0 || coll.contains(colorCode));
+    }
+
+    public static Integer[] gameSolution() {
+        Integer[] solution = new Integer[4];
+        Arrays.fill(solution,new Integer(0));
+        for (int i = 0; i < solution.length; i++) {
+            int colorCode = (int) (Math.random() * 8) + 1;
+            while (notUnique(solution, colorCode)) {
+                colorCode = (int) (Math.random() * 8) + 1;
+            }
+            solution[i] = colorCode;
+        }
+        return solution;
+    }
     @Autowired
     PlayRepository plays;
 
@@ -39,10 +57,10 @@ public class MastermindController {
             }
             Indicators blankChecks = new Indicators();
             for (int i = 0; i < 11; i++) {
-                blankChecks.setCheckSlot1(0);
-                blankChecks.setCheckSlot2(0);
-                blankChecks.setCheckSlot3(0);
-                blankChecks.setCheckSlot4(0);
+                blankChecks.setIndicator1(0);
+                blankChecks.setIndicator2(0);
+                blankChecks.setIndicator3(0);
+                blankChecks.setIndicator4(0);
                 checks.save(blankChecks);
             }
 //            blankRows.
@@ -52,6 +70,7 @@ public class MastermindController {
     }
     @CrossOrigin
     @RequestMapping (path = "/", method = RequestMethod.POST)
+
     public List<Play> getPlay() {
         return (List<Play>) plays.findAll();
     }

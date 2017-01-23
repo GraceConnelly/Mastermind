@@ -15,16 +15,16 @@ public class Indicators {
     int id;
 
     @Column
-    int checkSlot1;
+    int indicator1;
 
     @Column
-    int checkSlot2;
+    int indicator2;
 
     @Column
-    int checkSlot3;
+    int indicator3;
 
     @Column
-    int checkSlot4;
+    int indicator4;
 
     public int getId() {
         return id;
@@ -34,36 +34,36 @@ public class Indicators {
         this.id = id;
     }
 
-    public int getCheckSlot1() {
-        return checkSlot1;
+    public int getIndicator1() {
+        return indicator1;
     }
 
-    public void setCheckSlot1(int checkSlot1) {
-        this.checkSlot1 = checkSlot1;
+    public void setIndicator1(int indicator1) {
+        this.indicator1 = indicator1;
     }
 
-    public int getCheckSlot2() {
-        return checkSlot2;
+    public int getIndicator2() {
+        return indicator2;
     }
 
-    public void setCheckSlot2(int checkSlot2) {
-        this.checkSlot2 = checkSlot2;
+    public void setIndicator2(int indicator2) {
+        this.indicator2 = indicator2;
     }
 
-    public int getCheckSlot3() {
-        return checkSlot3;
+    public int getIndicator3() {
+        return indicator3;
     }
 
-    public void setCheckSlot3(int checkSlot3) {
-        this.checkSlot3 = checkSlot3;
+    public void setIndicator3(int indicator3) {
+        this.indicator3 = indicator3;
     }
 
-    public int getCheckSlot4() {
-        return checkSlot4;
+    public int getIndicator4() {
+        return indicator4;
     }
 
-    public void setCheckSlot4(int checkSlot4) {
-        this.checkSlot4 = checkSlot4;
+    public void setIndicator4(int indicator4) {
+        this.indicator4 = indicator4;
     }
     private void checkCheckSlotValue (int checkSlotValue) throws CheckCodeOutOfBoundsException {
         if(checkSlotValue < 0 || checkSlotValue > 2){
