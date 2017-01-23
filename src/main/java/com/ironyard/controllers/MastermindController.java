@@ -4,6 +4,7 @@ import com.ironyard.entities.Indicator;
 import com.ironyard.entities.Play;
 import com.ironyard.services.IndicatorsRepository;
 import com.ironyard.services.PlayRepository;
+import com.ironyard.viewmodels.BoardViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -46,31 +47,19 @@ public class MastermindController {
                 indicators.save(blankIndicators);
             }
             Integer[] gameSolution = Play.gameSolution();
-            int currentRound = 0;
 //            blankRows.
 //            Play initalplay = new Play();
 //            initalplay.setPlaySlot1();
         }
     }
 
-//    @CrossOrigin
-//    @RequestMapping(path = "/", method = RequestMethod.GET)
-//    public String mastermind(Model model) {
-//        model.addAttribute("play",plays.findAll());
-//        model.addAttribute("indicators",indicators.findAll());
-//        //model.addAttribute("round",round);
-//        return "mastermind";
-//    }
-
     @CrossOrigin
     @RequestMapping (path = "/", method = RequestMethod.POST)
-    public List<Play> homePage() {
-        return (List)plays.findAll();
+    public BoardViewModel homePage(@RequestBody Play newPlay) {
+        plays.save(newPlay);
+        return new BoardViewModel((List)plays.findAll());
 
-////        servlet.service("numberGuess",
-////                model.addAttribute("play",plays.findAll()),
-////                model.addAttribute("indicators",indicators.findAll());
-//
+
 ////        plays.update(numberGuess, currentRound);
 ////        Indicator.resolveUpdateIndicators();
 //        return new Indicator();
