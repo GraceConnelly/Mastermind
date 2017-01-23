@@ -6,6 +6,7 @@ import com.ironyard.services.IndicatorsRepository;
 import com.ironyard.services.PlayRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +18,7 @@ import java.util.List;
  * Created by graceconnelly on 1/22/17.
  */
 @RestController
+
 public class MastermindController {
     @Autowired
     PlayRepository plays;
@@ -48,7 +50,7 @@ public class MastermindController {
 //            initalplay.setPlaySlot1();
         }
     }
-
+    @CrossOrigin
     @RequestMapping (path = "/", method = RequestMethod.POST)
     public List<Play> getPlay() {
         return (List<Play>) plays.findAll();
