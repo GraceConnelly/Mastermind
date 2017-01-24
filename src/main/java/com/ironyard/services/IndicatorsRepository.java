@@ -27,8 +27,8 @@ public interface IndicatorsRepository extends CrudRepository<Indicator, Integer>
         for (int i = 0; i < collGuessed.size(); i++) {
             if (collSolution.get(i) == collGuessed.get(i)) {
                 indicator.add(2);
-                collGuessed.set(i, 9);
                 collSolution.set(i, 0);
+                collGuessed.set(i, 9);
                 continue;
             }
         }

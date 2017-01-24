@@ -20,7 +20,6 @@ import java.util.List;
  * Created by graceconnelly on 1/22/17.
  */
 @RestController
-
 public class MastermindController {
 
     private boolean reset = true;
@@ -43,6 +42,7 @@ public class MastermindController {
     @CrossOrigin
     @RequestMapping (path = "/", method = RequestMethod.POST)
     public ArrayViewModel homePage(@RequestBody int[] guess, int[] indicator) {
+        //how to be able to recieve different content types
         init();
         indicator = IndicatorsRepository.checkNumbers(guess, solution);
         reset = (Arrays.equals(indicator, new int[] {2,2,2,2}));
