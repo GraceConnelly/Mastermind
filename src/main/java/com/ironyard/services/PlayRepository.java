@@ -18,13 +18,14 @@ public interface PlayRepository extends CrudRepository<Play, Integer> {
     }
 
     static Integer[] gameSolution() {
+
         Integer[] solution = new Integer[4];
         Arrays.fill(solution,new Integer(0));
         for (int i = 0; i < solution.length; i++) {
             int colorCode = (int) (Math.random() * 8) + 1;
-//            while (notUnique(solution, colorCode)) {
-//                colorCode = (int) (Math.random() * 8) + 1;
-//            }
+            while (notUnique(solution, colorCode)) {
+                colorCode = (int) (Math.random() * 8) + 1;
+            }
             solution[i] = colorCode;
         }
         return solution;
