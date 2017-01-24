@@ -4,6 +4,7 @@ import com.ironyard.entities.Indicator;
 import com.ironyard.entities.Play;
 import com.ironyard.services.IndicatorsRepository;
 import com.ironyard.services.PlayRepository;
+import com.ironyard.viewmodels.ArrayViewModel;
 import com.ironyard.viewmodels.BoardViewModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -21,6 +22,8 @@ import java.util.List;
 
 public class MastermindController {
 
+    private boolean reset;
+
     @Autowired
     PlayRepository plays;
 
@@ -29,54 +32,23 @@ public class MastermindController {
 
     @PostConstruct
     public void init() {
-        if (plays.count() == 0){
-            Play blankPlays = new Play();
-            for (int i = 0; i < 12; i++) {
-                blankPlays.setPlaySlot1(0);
-                blankPlays.setPlaySlot2(0);
-                blankPlays.setPlaySlot3(0);
-                blankPlays.setPlaySlot4(0);
-                plays.save(blankPlays);
-            }
-            Indicator blankIndicators = new Indicator();
-            for (int i = 0; i < 11; i++) {
-                blankIndicators.setIndicator1(0);
-                blankIndicators.setIndicator2(0);
-                blankIndicators.setIndicator3(0);
-                blankIndicators.setIndicator4(0);
-                indicators.save(blankIndicators);
-            }
-            //Integer[] gameSolution = Play.gameSolution();
-//            blankRows.
-//            Play initalplay = new Play();
-//            initalplay.setPlaySlot1();
+        if (reset){
+            reset = false;
         }
     }
 
     @CrossOrigin
     @RequestMapping (path = "/", method = RequestMethod.POST)
-    public Iterable<Indicator> home () {
+    public ArrayViewModel homePage(@RequestBody int[] guess) {
         init();
-    //public int[] homePage(int[] guess) {
-//        Play thisPlay = new Play();
-//        thisPlay.setPlaySlot1(guess[0]);
-//        thisPlay.setPlaySlot2(guess[1]);
-//        thisPlay.setPlaySlot3(guess[2]);
-//        thisPlay.setPlaySlot4(guess[3]);
-//        plays.save(thisPlay);
-//        System.out.println(plays);
-
-        return indicators.findAll();
+        return new ArrayViewModel(guess);
     }
-//
-//    @CrossOrigin
-//    @RequestMapping (path = "/new-game", method = RequestMethod.POST) {
-//
-//    }
-//    public BoardViewModel homePage(@RequestBody Play newPlay) {
-        //return new BoardViewModel((List)plays.findAll());
-////        plays.update(numberGuess, currentRound);
-////        Indicator.resolveUpdateIndicators();
-    //  SIMPLIFIED POST!!
-    //public Play homePage() {
+
+    @CrossOrigin
+    @RequestMapping (path = "/new-game",method = RequestMethod.POST)
+    public String newGame () {
+        reset = true;
+        return "redirect:/";
+    }
+
 }
