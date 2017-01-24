@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.PostConstruct;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpServlet;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -44,6 +45,7 @@ public class MastermindController {
     public ArrayViewModel homePage(@RequestBody int[] guess, int[] indicator) {
         init();
         indicator = IndicatorsRepository.checkNumbers(guess, solution);
+        reset = (Arrays.equals(indicator, new int[] {2,2,2,2}));
         return new ArrayViewModel(indicator);
     }
 
