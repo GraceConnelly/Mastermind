@@ -22,7 +22,8 @@ import java.util.List;
 
 public class MastermindController {
 
-    private boolean reset;
+    private boolean reset = true;
+    private Integer[] solution;
 
     @Autowired
     PlayRepository plays;
@@ -33,15 +34,17 @@ public class MastermindController {
     @PostConstruct
     public void init() {
         if (reset){
+            solution = PlayRepository.gameSolution();
             reset = false;
         }
     }
 
     @CrossOrigin
     @RequestMapping (path = "/", method = RequestMethod.POST)
-    public ArrayViewModel homePage(@RequestBody int[] guess) {
+    public ArrayViewModel homePage(@RequestBody int[] guess, int[] indicator) {
         init();
-        return new ArrayViewModel(guess);
+        indicator = IndicatorsRepository.checkNumbers(guess, solution);
+        return new ArrayViewModel(indicator);
     }
 
     @CrossOrigin
