@@ -24,6 +24,7 @@ public class MastermindController {
 
     private boolean reset = true;
     private Integer[] solution;
+    private int rounds = 0;
 
     @Autowired
     PlayRepository plays;
@@ -41,12 +42,20 @@ public class MastermindController {
 
     @CrossOrigin
     @RequestMapping (path = "/", method = RequestMethod.POST)
-    public ArrayViewModel homePage(@RequestBody int[] guess, int[] indicator) {
-        //how to be able to recieve different content types
+    public ArrayViewModel homePage(@RequestBody int[] guess) {
+        //how to be able to receive different content types
         init();
-        indicator = IndicatorsRepository.checkNumbers(guess, solution);
-        reset = (Arrays.equals(indicator, new int[] {2,2,2,2}));
-        return new ArrayViewModel(indicator);
+        ArrayViewModel model = new ArrayViewModel();
+        model.setIndicator(IndicatorsRepository.checkNumbers(guess, solution));
+
+        if (Arrays.equals(model.getIndicator(), new int[] {2,2,2,2}) || model.getId() == 11) {
+            reset = true;
+            model.setSolution(solution);
+            ArrayViewModel.setStaticId(0);
+        }else {
+            model.setSolution(new Integer[] {0,0,0,0});
+        }
+        return model;
     }
 
     @CrossOrigin

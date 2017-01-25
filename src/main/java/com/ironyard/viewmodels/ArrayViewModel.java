@@ -7,11 +7,39 @@ import java.util.List;
  */
 public class ArrayViewModel {
 
+    private static int STATIC_ID = 0;
+    private int id = 0;
     private int[] guess;
     private int[] indicator;
+    private Integer[] solution;
 
-    public ArrayViewModel(int[] indicator) {
+
+    public ArrayViewModel() {
+        id = STATIC_ID++;
+    }
+
+
+    public ArrayViewModel( int[] guess, int[] indicator, Integer[] solution) {
+        this();
+        this.guess = guess;
         this.indicator = indicator;
+        this.solution = solution;
+    }
+
+    public static int getStaticId() {
+        return STATIC_ID;
+    }
+
+    public static void setStaticId(int staticId) {
+        STATIC_ID = staticId;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int[] getGuess() {
@@ -30,4 +58,11 @@ public class ArrayViewModel {
         this.indicator = indicator;
     }
 
+    public Integer[] getSolution() {
+        return solution;
+    }
+
+    public void setSolution(Integer[] solution) {
+        this.solution = solution;
+    }
 }
